@@ -322,4 +322,65 @@ button:hover {
   transition: 1.5s;
 }
 
+.filter {
+  display: flex;
+  flex-direction: column;
+  width: 252px;
+  height: 518px;
+  border: 1px solid #bdbdbd;
+  margin-top: 200px;
+  margin-left: 200px;
+}
+.filter__header {
+  width: 250px;
+  height: 70px;
+  background-color: rgba(217, 218, 217, 0.5);
+  display: flex;
+  flex-direction: row;
+}
+.filter__header_h {
+  width: 86px;
+  height: 28px;
+  color: #000000;
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: 0.48px;
+  padding-left: 40px;
+  padding-top: 15px;
+}
+.filter__list {
+  display: grid;
+  grid-template-columns: repeat(2, 222px);
+  grid-column-gap: 7px;
+  grid-template-rows: repeat(14, 30px);
+  margin-top: 15px;
+  list-style-type: none;
+  margin-bottom: 28px;
+}
+.filter__list_item {
+  width: 222px;
+  height: 30px;
+  color: #000000;
+  font-size: 14px;
+  font-weight: 400;
+  border: 1px solid #bdbdbd;
+}
+.filter__list_checkbox {
+  margin-top: 10px;
+  width: 17px;
+  height: 17px;
+  border: 1px solid #bdbdbd;
+}
+
+.close_x {
+  width: 16px;
+  height: 28px;
+  color: #000000;
+  font-size: 24px;
+  font-weight: 500;
+  padding-left: 120px;
+  text-decoration: none;
+  padding-top: 15px;
+}
+
 /*# sourceMappingURL=style.css.map */
