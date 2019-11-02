@@ -1,0 +1,385 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    box-sizing: border-box;
+}
+input, textarea, button {
+    outline: none;
+}
+button {
+    background-color: #BFE1E1;
+    border-radius: 10px;
+    border: none;
+    font-size: 24px;
+    color: black;
+    text-decoration: none;
+    margin: 15px auto;
+    text-align: center;
+}
+button:hover {
+    box-shadow: 0 0 0 3px #BDBDBD;
+}
+a {
+    text-decoration: none;
+}
+
+.container {
+    width: 1440px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.header {
+    height: 70px;
+    background-color: rgba(217, 218, 217, 0.5);
+    display: flex;
+    justify-content: flex-start;
+}
+
+.logo {
+    border-radius: 70px;
+    height: 70px;
+    width: 70px;
+    line-height: 70px;
+    background-color: #000;
+    font-size: 30px;
+    color: #fff;
+    text-align: center;
+    margin-left: 30px;
+}
+
+.right {
+    display: flex;
+    margin-left: auto;
+    margin-right: 62px;
+    align-items: center;
+}
+
+.pic {
+    height: 40px;
+    width: 40px;
+    background-color: #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.wrap {
+    font-size: 26px;
+    height: calc(100% - 40px - 70px);
+    display: flex;
+    justify-content: center;
+}
+
+.wrap_form {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 179px;
+    width: inherit;
+}
+
+.wrap_button, .wrap_logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrap_logo {
+    border-radius: 118px;
+    width: 118px;
+    height: 118px;
+    background-color: #D2EBD5;
+    margin-bottom: 80px;
+}
+
+.wrap_button {
+    border: none;
+    font-size: inherit;
+    width: 260px;
+    height: 70px;
+    border-radius: 10px;
+    background: #BFE1E1;
+    margin-bottom: 50px;
+    cursor: pointer;
+}
+
+.wrap_button:last-of-type {
+    margin-bottom: 0;
+}
+
+.wrap_input {
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align: center;
+    font-size: inherit;
+    background: #F7F7F7;
+    width: 260px;
+    height: 70px;
+    border: 1px solid #BDBDBD;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.wrap_h3 {
+    position: absolute;
+    margin-top: 30px;
+}
+
+.wrap_form__reg {
+    margin-top: 120px;
+    margin-bottom: 40px;
+}
+
+.wrap_logo__reg {
+    margin-bottom: 40px;
+}
+
+#wrap_form__login {
+    width: 260px;
+}
+
+#wrap_form__reg {
+    width: 710px;
+}
+
+#wrap_form__reg, #wrap_input__numbers {
+    display: flex;
+    flex-direction: column;
+}
+
+.wrap_input {
+    width: 100%;
+    background-color: #f7f7f7;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.wrap_input:last-of-type {
+    margin-bottom: 0;
+}
+
+.wrap_input__line {
+    display: flex;
+}
+
+#wrap_input__numbers {
+    width: 408px;
+}
+
+#wrap_input__numbers .wrap_input {
+    width: 289px;
+}
+
+#wrap_input__numbers .wrap_input__line {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.wrap_input__line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.wrap_form__reg .wrap_button {
+    margin: 0 auto;
+    width: 350px;
+    background: #BFE1E1;
+}
+
+.wrap_input__line .wrap_input {
+    width: 350px;
+}
+
+.wrap_input__bottom {
+    align-items: flex-start;
+}
+
+.footer {
+    height: 40px;
+    background-color: #7B7B7B;
+    font-size: 13px;
+    line-height: 32px;
+    letter-spacing: 0.03em;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.footer a {
+    color: #000000;
+    line-height: 40px;
+    margin-left: 17px;
+    margin-right: 31px;
+}
+
+.error_input {
+    border: 1px solid red;
+}
+
+.gray1 {
+    background-color: #EDEDEC;
+}
+
+.gray2 {
+    background-color: #e0e0e0;
+}
+
+.gray3 {
+    background-color: #c4c4c4;
+}
+
+.header_buttons {
+    display: flex;
+    height: 100%;
+}
+
+.header_buttons .header_button {
+    background: #BFE1E1;
+    width: 223px;
+    font-size: 20px;
+    margin-left: 20px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.wrap__home {
+    margin-top: 20px;
+}
+
+.wrap__home .wrap_form {
+    margin-top: 0;
+}
+
+.wrap_form__caption {
+    margin-bottom: 31px;
+}
+
+.wrap_dashboard .cell {
+    min-width: 224px;
+    min-height: 124px;
+}
+
+.wrap_dashboard .cell div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.wrap_dashboard .pointer {
+    cursor: pointer;
+}
+
+.wrap_dashboard {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-areas: "cell_1  cell_1  cell_2  cell_2 " "cell_3  cell_3  cell_3  cell_3 " "cell_4  cell_5  cell_5  cell_5 " "cell_4  cell_5  cell_5  cell_5 ";
+}
+
+.wrap_dashboard p {
+    font-size: 18px;
+}
+
+.wrap_dashboard h2 {
+    font-size: 70px;
+    margin-bottom: 0;
+}
+
+.wrap_dashboard h4 {
+    font-size: 40px;
+}
+
+.wrap_dashboard h5 {
+    font-size: 32px;
+}
+
+#wrap_grid_1 {
+    grid-area: cell_1;
+}
+
+#wrap_grid_2 {
+    grid-area: cell_2;
+}
+
+#wrap_grid_3 {
+    grid-area: cell_3;
+}
+
+#wrap_grid_4 {
+    grid-area: cell_4;
+}
+
+#wrap_grid_5 {
+    grid-area: cell_5;
+}
+
+.wrap_grid__column {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-areas: "cell_41" "cell_42";
+}
+
+#wrap_grid_41 {
+    grid-area: cell_41;
+    height: 160px;
+}
+
+#wrap_grid_42 {
+    grid-area: cell_42;
+    height: 103px;
+}
+
+.wrap_grid__table {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-areas: "cell_51 cell_52 cell_52" "cell_53 cell_53 cell_54";
+}
+
+#wrap_grid_51 {
+    grid-area: cell_51;
+}
+
+#wrap_grid_52 {
+    grid-area: cell_52;
+}
+
+#wrap_grid_53 {
+    grid-area: cell_53;
+}
+
+#wrap_grid_54 {
+    grid-area: cell_54;
+}
+
+.grid_fill {
+    height: 100%;
+    width: 100%;
+}
+
+.grid_button {
+    height: 40px;
+    width: 100%;
+    font-size: 20px;
+    line-height: 40px;
+    text-align: center;
+    background: #BFE1E1;
+}
