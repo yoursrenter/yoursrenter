@@ -11,12 +11,6 @@ namespace App\models;
 
 class User extends Model
 {
-    public $russianColumns = [
-        'organizationName',
-        'organizationAddress',
-        'bank'
-    ];
-
     public function __construct(array $data = [])
     {
         parent::__construct($data);

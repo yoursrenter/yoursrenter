@@ -2,6 +2,9 @@
  * в этом файле: класс для отправки формы, класс DashBoard, класс для верхних кнопок
  */
 
+/**
+ * промужточный элемент, который и будет заниматься отправкой данных
+ */
 class FormDashboard {
     constructor(value) {
         this.form = document.getElementById('wrap_dashboard');
@@ -16,6 +19,9 @@ class FormDashboard {
     }
 }
 
+/**
+ * "считыватель" того, куда нажмет пользователь на Дашбоарде
+ */
 class DashBoard {
     constructor() {
         this.init();
@@ -84,6 +90,9 @@ class DashBoard {
 
 }
 
+/**
+ * верхнее меню
+ */
 class TopButtons {
     constructor() {
         this.init();

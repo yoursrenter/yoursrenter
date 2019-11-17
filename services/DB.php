@@ -4,6 +4,7 @@ namespace App\services;
 
 use App\models\Model;
 use App\traits\TSingleton;
+use PDO;
 
 class DB implements IDB
 {

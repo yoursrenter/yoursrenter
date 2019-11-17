@@ -1,8 +1,4 @@
 <article class="wrap_form">
-    <div class="wrap_form__top">
-        <a href="#" class="wrap_button" id="tenants">Арендаторы</a>
-        <a href="#" class="wrap_button" id="finance">Финансовая таблица</a>
-    </div>
     <div class="wrap_form__caption">Dashboard</div>
     <div class="wrap_dashboard">
         <div id="wrap_grid_1" class="cell gray2">
@@ -22,9 +18,9 @@
             <div id="wrap_grid_41" class="gray1">
                 <div id="wrap_grid_41__text" class="grid_fill pointer">
                     <h5>150</h5>
-                    <p>Арендаторов</p>
+                    <a href="?"><p>Арендаторов</p></a>
                 </div>
-                <a href="#" id="wrap_grid_add" class="grid_button pointer">Добавить еще</a>
+                <a href="?" id="wrap_grid_add" class="grid_button pointer">Добавить еще</a>
             </div>
             <div id="wrap_grid_42" class="gray3 pointer"></div>
         </div>

@@ -17,7 +17,6 @@ class Session
 
     public static function setAuth($loginName)
     {
-        session_start();
         $_SESSION['auth'] = [
             'name' => $loginName
         ];
@@ -41,6 +40,5 @@ class Session
     public static function unsetAuth()
     {
         unset($_SESSION['auth']);
-//        session_destroy();
     }
 }

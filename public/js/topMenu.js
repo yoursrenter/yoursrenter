@@ -9,6 +9,12 @@ class TopMenu {
         this.settingsButtonElem = document.getElementById('push_settings');
         this.logoutElem = document.getElementById('logout');
         this.formTopMenuElem = document.getElementById('formTopMenu');
+
+        this.tenantsButtonElem = document.getElementById('tenantsButton');
+        this.financeButtonElem = document.getElementById('financeButton');
+        this.headerButtonsElem = document.getElementById('header_buttons');
+        this.mainTemplateElem = document.getElementById('mainTemplate');
+        this.contentTemplateElem = document.getElementById('contentTemplate');
     }
 
     handle() {
@@ -19,6 +25,18 @@ class TopMenu {
         this.settingsButtonElem.addEventListener('click', () => {
             event.preventDefault();
             this.showSettings();
+        });
+        this.financeButtonElem.addEventListener('click',()=>{
+            event.preventDefault();
+            this.mainTemplateElem.value = 'home';
+            this.contentTemplateElem.value = 'financialTable';
+            this.headerButtonsElem.submit();
+        });
+        this.tenantsButtonElem.addEventListener('click',()=>{
+            event.preventDefault();
+            this.mainTemplateElem.value = 'home';
+            this.contentTemplateElem.value = 'listOfTenants';
+            this.headerButtonsElem.submit();
         });
     }
 
@@ -33,3 +51,4 @@ class TopMenu {
 }
 
 const topMenu = new TopMenu();
+

@@ -2,9 +2,9 @@
 
 return [
     'user' => 'root',
-    'pass' => '11111',
+    'pass' => '',
     'driver' => 'mysql',
     'db' => 'your_renter',
-    'host' => 'localhost:3306',
-    'charset' => 'UTF8',
+    'host' => 'localhost:3307',
+    'charset' => 'utf8',
 ];

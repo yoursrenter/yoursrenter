@@ -2,9 +2,7 @@
 
 namespace App\models;
 
-use App\services\Check;
 use App\services\DB;
-use App\services\IDB;
 use App\traits\TSingleton;
 
 class Model
@@ -52,31 +50,9 @@ class Model
 
     public function setData($data)
     {
-        $this->toValidateData($data);
+//        $this->toCorrectForDB($data);
         $this->data = $data;
     }
-
-    /**
-     * метод для приведения к допустимому для базы данных виду (русские буквы не разрешены)
-     * @param $data
-     */
-    public function toValidateData(&$data)
-    {
-        $arr = $this->russianColumns;
-        if (!$arr) {
-            return;
-        }
-        foreach ($data as $key => $value) {
-            if (in_array($key, $arr) && $this->isRussianText($value)) {
-                $data[$key] = Check::translit($value);
-                var_dump($this);
-//                $this->russianColumns[] = $key;
-                // записать в базу данных (поле russianColumns) что $key - русская колонка
-            }
-        }
-        var_dump($data);
-    }
-    public function isRussianText($text){return true;}
 
     /**
      * Возращает запись с указанным id
@@ -111,6 +87,10 @@ class Model
     {
         $tableName = static::getTableName();
         $sql = "SELECT * FROM {$tableName}";
+        return DB::getInstance()->getAll($sql);
+    }
+
+    protected function query($sql = ''){
         return DB::getInstance()->getAll($sql);
     }
 
@@ -199,10 +179,8 @@ class Model
     public function save()
     {
         if (!$this->data['id']) {
-            var_dump('****');
             $this->insert();
         } else {
-            var_dump('&&&&&');
             $this->update();
         }
     }

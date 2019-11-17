@@ -15,5 +15,7 @@ spl_autoload_register(
 
 include $_SERVER['DOCUMENT_ROOT'] . '/config/const.php';
 
+session_start();
+
 $controller = new Controller();
 

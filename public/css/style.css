@@ -5,11 +5,27 @@
 
 html, body {
     height: 100%;
-    font-family: Roboto;
+    font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: normal;
+    box-sizing: border-box;
 }
-
+input, textarea, button {
+    outline: none;
+}
+button {
+    background-color: #BFE1E1;
+    border-radius: 10px;
+    border: none;
+    font-size: 24px;
+    color: black;
+    text-decoration: none;
+    margin: 15px auto;
+    text-align: center;
+}
+button:hover {
+    box-shadow: 0 0 0 3px #BDBDBD;
+}
 a {
     text-decoration: none;
 }
@@ -17,6 +33,7 @@ a {
 .container {
     width: 1440px;
     margin: 0 auto;
+    position: relative;
 }
 
 .header {
@@ -127,9 +144,11 @@ a {
 .wrap_logo__reg {
     margin-bottom: 40px;
 }
-#wrap_form__login{
+
+#wrap_form__login {
     width: 260px;
 }
+
 #wrap_form__reg {
     width: 710px;
 }
@@ -198,7 +217,8 @@ a {
     align-items: center;
     justify-content: space-between;
 }
-.footer a{
+
+.footer a {
     color: #000000;
     line-height: 40px;
     margin-left: 17px;
@@ -221,29 +241,21 @@ a {
     background-color: #c4c4c4;
 }
 
-.wrap_form__top {
+.header_buttons {
     display: flex;
+    height: 100%;
 }
 
-.wrap_form__top .wrap_button {
-    width: 224px;
-    height: 40px;
-    left: 486px;
-    top: 100px;
-    border-radius: 10px;
-
-    font-style: normal;
-    font-weight: normal;
+.header_buttons .header_button {
+    background: #BFE1E1;
+    width: 223px;
     font-size: 20px;
-    line-height: 23px;
-    text-align: center;
+    margin-left: 20px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    margin-right: 20px;
-    margin-bottom: 32px;
-}
-
-.wrap_form__top .wrap_button:last-child {
-    margin-right: 0;
 }
 
 .wrap__home {

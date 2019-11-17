@@ -2,7 +2,9 @@
 
 namespace App\controllers;
 
+use App\models\Finance;
 use App\models\Model;
+use App\models\Tenant;
 use App\models\User;
 use App\services\Check;
 use App\services\render\TvigRenderTemplate;
@@ -18,6 +20,7 @@ class Controller
     protected $tableName;
     protected $model;
     private $params;
+    private $data;
     private $renderParams;
     private $loginParams;
 
@@ -34,19 +37,303 @@ class Controller
         echo $this->render();
     }
 
+    /**
+     * Функция получения данных, которые необходимо отобразить в шаблоне
+     * @param $mainTemplate (главная часть шаблона)
+     * @param $contentTemplate (контентная часть шаблона)
+     * @return array (возвращаемые данные)
+     */
+    private function getDataForTemplate($mainTemplate, $contentTemplate)
+    {
+        if ($mainTemplate != 'home') {
+            return [];
+        }
+        switch ($contentTemplate) {
+            case 'listOfTenants':
+                $filter_params = [
+                    [
+                        'caption' => 'Имя арендатора',
+                        'name' => 'tenant_name',
+                        'placeholder' => 'Имя арендатора'
+                    ],
+                    [
+                        'caption' => 'Телефон',
+                        'name' => 'tenant_phone',
+                        'placeholder' => '+7 999 999 99 99'
+                    ],
+                    [
+                        'caption' => 'Электронный адрес',
+                        'name' => 'tenant_email',
+                        'placeholder' => 'test@test.com'
+                    ],
+                    [
+                        'caption' => 'Номер договора аренды',
+                        'name' => 'contract_name',
+                        'placeholder' => 'Наименование договора'
+                    ],
+                    [
+                        'caption' => 'Дата заключения договора',
+                        'name' => 'create_at',
+                        'placeholder' => '01.01.2001'
+                    ],
+                    [
+                        'caption' => 'Дата акта приема-передач',
+                        'name' => 'getting_act_at',
+                        'placeholder' => '01.01.2001'
+                    ],
+                    [
+                        'caption' => 'Дата окончания договора',
+                        'name' => 'expiration_at',
+                        'placeholder' => '01.01.2001'
+                    ],
+                    [
+                        'caption' => 'Арендуемая площадь (кв.м)',
+                        'name' => 'area',
+                        'placeholder' => '500'
+                    ],
+                    [
+                        'caption' => 'Объект аренды',
+                        'name' => 'rent_object',
+                        'placeholder' => 'Объект аренды'
+                    ],
+                    [
+                        'caption' => 'Дата начисления аренды',
+                        'name' => 'rent_at',
+                        'placeholder' => '01.01.2001'
+                    ],
+                    [
+                        'caption' => 'Сумма аренды в месяц (руб.)',
+                        'name' => 'rent',
+                        'placeholder' => '500.000'
+                    ],
+                    [
+                        'caption' => 'Обеспечительный платеж',
+                        'name' => 'deposit',
+                        'placeholder' => '500.000'
+                    ],
+                    [
+                        'caption' => 'Дата платежа',
+                        'name' => 'payment_at',
+                        'placeholder' => '01.01.2001'
+                    ],
+                    [
+                        'caption' => 'Дата акта доступа',
+                        'name' => 'avialable_act_at',
+                        'placeholder' => '01.01.2001'
+                    ]
+                ];
+                $filter_content = TvigRenderTemplate::RenderTemplate('home/filter', ['filter_params' => $filter_params]);
+                $column_names = [
+                    'Арендатор',
+                    'Номер договора',
+                    'Дата заключения договора',
+                    'Дата акта приема-передач',
+                    'Дата окончания договора',
+                    'Арендуемая площадь, (кв.м)',
+                    'Арендуемый объект',
+                    'Дата начисления аренды',
+                    'Арендная плата в месяц, (руб)',
+                    'Обеспечительный платеж'
+                ];
+
+                $user_login = Session::getAuth()['name'];
+                $tenants = new Tenant();
+                $data = $tenants->getData($user_login);
+
+                return [
+                    'column_names' => $column_names,
+                    'data' => $data,
+                    'filter_content' => $filter_content
+                ];
+                break;
+            case 'addTenant':
+                $fields = [
+                    [
+                        'caption' => 'Наименование арендатора',
+                        'name' => 'tenant_name',
+                        'placeholder' => 'Введите наименование арендатора'
+                    ],
+                    [
+                        'caption' => 'ФИО контактного лица',
+                        'name' => 'contact_fio',
+                        'placeholder' => 'Нажмите что бы ввести'
+                    ],
+                    [
+                        'caption' => 'Контактный телефон',
+                        'name' => 'tenant_phone',
+                        'placeholder' => '+7 000 000 00 00'
+                    ],
+                    [
+                        'caption' => 'Электронный адрес',
+                        'name' => 'tenant_email',
+                        'placeholder' => 'test@test.com'
+                    ],
+                    [
+                        'caption' => 'Номер договора аренды',
+                        'name' => 'contract_name',
+                        'placeholder' => 'Введите номер (наименование) договора'
+                    ],
+                    [
+                        'caption' => 'Дата акта доступа',
+                        'name' => 'accept_act_at',
+                        'placeholder' => '01.01.2001'
+                    ],
+                    [
+                        'caption' => 'Дата заключения договора аренды',
+                        'name' => 'contract_created_at',
+                        'placeholder' => '01.01.2001'
+                    ],
+                    [
+                        'caption' => 'Дата акта приема-передачи',
+                        'name' => 'getting_act_at',
+                        'placeholder' => '01.01.2001'
+                    ],
+                    [
+                        'caption' => 'Арендуемая площадь (кв.м)',
+                        'name' => 'area',
+                        'placeholder' => '500'
+                    ],
+                    [
+                        'caption' => 'Сумма аренды в месяц (руб.)',
+                        'name' => 'rent',
+                        'placeholder' => '500.000'
+                    ],
+                    [
+                        'caption' => 'Сумма обеспечительного платежа (руб.)',
+                        'name' => 'deposit',
+                        'placeholder' => '500.000'
+                    ]
+                ];
+                return [
+                    'fields' => $fields
+                ];
+                break;
+            case 'financialTable':
+                $user_login = Session::getAuth()['name'];
+                $finance = new Finance();
+
+                $column_names = [
+                    ['name' => 'Имя арендатора'],
+                    ['name' => 'Номер договора аренды'],
+                    [
+                        'name' => 'Октябрь',
+                        'content' => [
+                            'постоянная',
+                            'переменная'
+                        ]
+                    ],
+                    ['name' => 'Итого']
+                ];
+
+                $data = $finance->getData($user_login);
+
+                return [
+                    'column_names' => $column_names,
+                    'data' => $data['last']
+                ];
+                break;
+            case 'personalFinTable':
+                $column_names = [
+                    'tenant_name' => 'Наименование арендатора:',
+                    'contact_fio' => 'Контактное лицо',
+                    'tenant_phone' => 'Контактный телефон',
+                    'tenant_email' => 'Электронный адрес',
+                    'deposit' => 'Обеспечительный платеж'
+                ];
+                $tenants = [
+                    'tenant_name' => 'ООО Ромашка',
+                    'contact_fio' => 'Маркизова Екатерина Николаевна',
+                    'tenant_phone' => '+7 999 000 00 00',
+                    'tenant_email' => 'lorem@gmail.com',
+                    'deposit' => 'Σ  1 600 000'
+                ];
+                $fin_info = [
+                    [
+                        'month' => 'Сентябрь',
+                        'content' => [
+                            'rent_fixed' => '200 000',
+                            'rent_variable' => '1 000',
+                            'payment' => '200 000'
+                        ]
+                    ],
+                    [
+                        'month' => 'Октябрь',
+                        'content' => [
+                            'rent_fixed' => '300 000',
+                            'rent_variable' => '1 000',
+                            'payment' => '80 000'
+                        ]
+                    ]
+                ];
+                $fin_info_sum = [
+                    'rent_fixed' => '400 000',
+                    'rent_variable' => '2 500',
+                    'payment' => '400 000'
+                ];
+                return [
+                    'column_names' => $column_names,
+                    'tenant' => $tenants,
+                    'fin_info' => $fin_info,
+                    'fin_info_sum' => $fin_info_sum
+                ];
+                break;
+        }
+        return [];
+    }
+
+    public
+    function setDirectParams($mainTemplate, $contentTemplate)
+    {
+        $this->params = array_merge($this->params, $this->getDataForTemplate($mainTemplate, $contentTemplate));
+
+        $this->renderParams['mainTemplate'] = $mainTemplate;
+        $this->renderParams['contentTemplate'] = $contentTemplate;
+        unset($mainTemplate);
+        unset($contentTemplate);
+    }
+
+    private function setData($data)
+    {
+        $this->data = $data;
+    }
+
+    private function getData()
+    {
+        return $this->data;
+    }
 
     public function request()
     {
+        if (isset($_POST['method'])) {
+            if ($_POST['method'] == 'add') {
+                unset($_POST['method']);
+                $this->setData($_POST);
+                $this->addAction('tenant');
+            }
+        }
         if (isset($_POST['mainTemplate'])) {
-            $this->renderParams['mainTemplate'] = $_POST['mainTemplate'];
-            $this->renderParams['contentTemplate'] = $_POST['contentTemplate'];
-            unset($_POST['mainTemplate']);
-            unset($_POST['contentTemplate']);
+            $this->setDirectParams($_POST['mainTemplate'], $_POST['contentTemplate']);
         }
 
         if (isset($_POST['action'])) {
             $method = $_POST['action'] . 'Action';
             $this->$method();
+        }
+
+        if ($_POST['info'] == 'dashboard') {
+            switch ($_POST['data']) {
+                case 'tenants':
+                    $this->setDirectParams('home', 'listOfTenants');
+                    break;
+                case 'add_tenant':
+                    $this->setDirectParams('home', 'addTenant');
+                    break;
+                case 'areas':
+//                    $this->setDirectParams('home', 'personalFinTable');
+                    break;
+                case 'price':
+                    break;
+            }
         }
 
     }
@@ -62,9 +349,15 @@ class Controller
         }
     }
 
+    public function redirect($link)
+    {
+        header("Location:" . $link);
+    }
+
     public function logoutAction()
     {
         Session::unsetAuth();
+        $this->redirect('?');
     }
 
     public function registrationAction()
@@ -75,7 +368,7 @@ class Controller
         }
         $user = new User();
         $user->setData($data);
-//        $user->save();
+        $user->save();
     }
 
     public function handleRenderParams()
@@ -107,17 +400,7 @@ class Controller
             }
 
         } else {
-
             $this->renderParams['mainTemplate'] = self::$defaultMainTemplateForAuth;
-            /*
-            if ($this->renderParams['mainTemplate'] == 'home') {
-                switch ($this->renderParams['contentTemplate']) {
-                    default:
-                        $this->renderParams['contentTemplate'] = 'default';
-                }
-            }
-            */
-
         }
     }
 
@@ -140,6 +423,7 @@ class Controller
 
         $params['htmlScripts'] = $this->getHTMLScripts();
         $params = array_merge($params, $this->renderParams);
+        $params = array_merge($params, $this->params);
         return TvigRenderTemplate::Render(
             $params
         );
@@ -215,11 +499,15 @@ class Controller
         header("Location:main.php?action=showAll");
     }
 
-    public function addAction()
+    public
+    function addAction($param = [])
     {
-        $this->model = new Model($this->data);
-        $this->model->setTableName($this->tableName);
-        $this->model->insert();
+        if ($param == 'tenant') {
+            $tenant = new Tenant();
+            $tenant->addTenantInfo($this->getData());
+            $this->setDirectParams('home','listOfTenants');
+            $this->redirect('?');
+        }
     }
 
     public function updateAction()
@@ -237,14 +525,28 @@ class Controller
 
     public function getHTMLScripts()
     {
-        $htmlText = '';
-        $scriptNames = scandir(PATCH_JS);
-        foreach ($scriptNames as $fileName) {
-            if ($fileName === '.' || $fileName === '..') {
-                continue;
-            }
-            $htmlText .= "<script src='" . PATCH_JS . "{$fileName}'></script>";
+        $mainTmpl = $this->renderParams['mainTemplate'];
+        $contentTmpl = $this->renderParams['contentTemplate'];
+
+        $htmlText = "<script src='/public/js/topMenu.js'></script>";
+
+        if (!Session::getAuth()) {
+            $htmlText .= "<script src='/public/js/validateForm.js'></script>";
+            return $htmlText;
         }
+
+        // home.js
+//        $htmlText .= "<script src='/public/js/" . $mainTmpl . ".js'></script>";
+
+        switch ($contentTmpl) {
+            case 'default':
+            case '':
+                $htmlText .= "<script src='/public/js/dashBoard.js'></script>";
+                break;
+            default:
+                $htmlText .= '<script src="/public/js/' . $contentTmpl . '.js"></script>';
+        }
+
         return $htmlText;
     }
 
